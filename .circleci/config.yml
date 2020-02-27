@@ -1,8 +1,8 @@
 version: 2
-executors:
-  default:
-    machine: true
-    working_directory: /tmp/twistlock-scan
+#executors:
+#  default:
+#    machine: true
+#    working_directory: /tmp/twistlock-scan
 jobs:
   build:
     executor: machine
@@ -19,7 +19,7 @@ jobs:
       TL_C: high
     steps:
       - checkout
-      - setup_remote_docker
+    #  - setup_remote_docker
 
       - run:
           name: build
