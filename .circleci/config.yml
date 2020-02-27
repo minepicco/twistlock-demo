@@ -13,7 +13,6 @@ jobs:
         #  aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
     environment:
       TL_IMAGE: macnica-image:0.7
-      TL_URL: https://asia-northeast1.cloud.twistlock.com/anz-3051008
       TL_V: high
       TL_OPT: --only-fixed
       TL_C: high
