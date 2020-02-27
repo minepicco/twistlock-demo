@@ -5,7 +5,7 @@ executors:
     working_directory: /tmp/twistlock-scan
 jobs:
   build:
-    executor: default
+    executor: machine
     #docker:
     #  - image: minepicco/cci-aws-docker:latest
         #aws_auth:
