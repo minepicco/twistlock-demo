@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: minepicco/cci-aws-docker:latest
+        #aws_auth:
+        #  aws_access_key_id: $AWS_ACCESS_KEY_ID
+        #  aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    environment:
+      TL_IMAGE: macnica-image:0.7
+      TL_URL: https://asia-northeast1.cloud.twistlock.com/anz-3051008
+      TL_V: high
+      TL_OPT: --only-fixed
+      TL_C: high
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+          name: build
+          command: docker build -t $TL_IMAGE .
+      - run:
+          name: get twistcli
+          command: |
+            curl -k -u $tl_u:$tl_p --output twistcli $TL_URL"/api/v1/util/twistcli"
+            chmod +x twistcli
+      - run:
+          name: scan image
+          command: |
+            ./twistcli images scan --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE
+      #- run:
+      #    name: docker login
+      #    command: docker login -u $username -p $password #-e $mailaddress     
+      #- run:
+      #    name: docker push
+      #    command: docker push $image
