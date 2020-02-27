@@ -1,8 +1,13 @@
 version: 2
+executors:
+  default:
+    machine: true
+    working_directory: /tmp/twistlock-scan
 jobs:
   build:
-    docker:
-      - image: minepicco/cci-aws-docker:latest
+    executor: default
+    #docker:
+    #  - image: minepicco/cci-aws-docker:latest
         #aws_auth:
         #  aws_access_key_id: $AWS_ACCESS_KEY_ID
         #  aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
