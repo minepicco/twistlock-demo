@@ -31,7 +31,7 @@ jobs:
       - run:
           name: scan image
           command: |
-            ./twistcli images scan --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE
+            ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE
       #- run:
       #    name: docker login
       #    command: docker login -u $username -p $password #-e $mailaddress     
