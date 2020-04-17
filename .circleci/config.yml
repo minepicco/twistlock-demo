@@ -34,9 +34,9 @@ jobs:
             ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE > temp.txt
             cat temp.txt 
             e=`cat temp.txt | grep -c "OS not supported and may be missing vulnerability data"`
-            if [ $e -gt 0]; theb
+            if [ $e -gt 0 ]; then
               echo "OS not supported and may be missing vulnerability data"
-              exit 128
+              exit 1
             fi
       #- run:
       #    name: docker login
