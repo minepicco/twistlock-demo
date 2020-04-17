@@ -15,7 +15,7 @@ jobs:
       TL_IMAGE: macnica-image:0.7
       TL_V: critical
       TL_OPT: --only-fixed
-      TL_C: high
+      TL_C: critical
     steps:
       - checkout
     #  - setup_remote_docker
@@ -37,7 +37,7 @@ jobs:
               echo ""
               echo "This build is stopped with Failure because the OS is NOT supported and may be missing vulnerability data. "
               echo "Please chose supported OS version for the base image"
-              exit 0
+              exit 128
             fi
       #- run:
       #    name: docker login
