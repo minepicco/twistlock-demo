@@ -31,7 +31,7 @@ jobs:
       - run:
           name: scan image
           command: |
-            script -c ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE | tee temp.txt
+            ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE | tee temp.txt
             e=`cat temp.txt | grep -c "OS not supported and may be missing vulnerability data"`
             if [ $e -gt 0 ]; then
               echo ""
