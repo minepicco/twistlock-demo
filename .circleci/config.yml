@@ -35,7 +35,9 @@ jobs:
             cat temp.txt 
             e=`cat temp.txt | grep -c "OS not supported and may be missing vulnerability data"`
             if [ $e -gt 0 ]; then
-              echo "OS not supported and may be missing vulnerability data"
+              echo ""
+              echo "This build is stopped with Failure because the OS is NOT supported and may be missing vulnerability data. "
+              echo "Please chose supported OS version for the base image"
               exit 1
             fi
       #- run:
