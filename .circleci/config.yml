@@ -12,7 +12,7 @@ jobs:
         #  aws_access_key_id: $AWS_ACCESS_KEY_ID
         #  aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
     environment:
-      TL_IMAGE: macnica-image:0.7
+      TL_IMAGE: macnica-image:0.8
       TL_V: critical
       TL_OPT: --only-fixed
       TL_C: critical
@@ -29,16 +29,23 @@ jobs:
             curl -k -u $tl_u:$tl_p --output twistcli $TL_URL"/api/v1/util/twistcli"
             chmod +x twistcli
       - run:
-          name: scan image
+          name: Prisma Cloud Vuln/Compliance check
           command: |
-            ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE | tee temp.txt
-            e=`cat temp.txt | grep -c "OS not supported and may be missing vulnerability data"`
-            if [ $e -gt 0 ]; then
-              echo ""
-              echo "This build is stopped with Failure because the OS is NOT supported and may be missing vulnerability data. "
-              echo "Please chose supported OS version for the base image"
-              exit 128
-            fi
+            curl -k -u $tl_u:$tl_p --output twistcli $TL_URL"/api/v1/util/twistcli"
+            chmod +x twistcli
+            ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci $TL_IMAGE
+            
+      #- run:
+      #    name: scan image
+      #    command: |
+      #      ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --vulnerability-threshold $TL_V $TL_OPT --compliance-threshold $TL_C $TL_IMAGE | tee temp.txt
+      #      e=`cat temp.txt | grep -c "OS not supported and may be missing vulnerability data"`
+      #      if [ $e -gt 0 ]; then
+      #        echo ""
+      #        echo "This build is stopped with Failure because the OS is NOT supported and may be missing vulnerability data. "
+      #        echo "Please chose supported OS version for the base image"
+      #        exit 128
+      #      fi
       #- run:
       #    name: docker login
       #    command: docker login -u $username -p $password #-e $mailaddress     
