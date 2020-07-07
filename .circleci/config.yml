@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Docker test
           command: |
-            docker run --name mac -d$TL_IMAGE 
+            docker run --name mac -d $TL_IMAGE 
             docker logs $(docker ps -q)
             docker stop mac
             
