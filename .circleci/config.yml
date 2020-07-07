@@ -35,6 +35,13 @@ jobs:
             chmod +x twistcli
             ./twistcli images scan --details --address $TL_URL -u $tl_u -p $tl_p --ci $TL_IMAGE
             
+      - run:
+          name: Docker test
+          command: |
+            docker run --name mac -d$TL_IMAGE 
+            docker logs $(docker ps -q)
+            docker stop mac
+            
       #- run:
       #    name: scan image
       #    command: |
