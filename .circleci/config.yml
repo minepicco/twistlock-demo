@@ -39,7 +39,10 @@ jobs:
           name: Docker test
           command: |
             docker run --name mac -d $TL_IMAGE 
+            echo "----------------Logs---------------"
             docker logs $(docker ps -q)
+            echo "----------------Inspect---------------"
+            docker inspect $(docker ps -q)
             docker stop mac
             
       #- run:
